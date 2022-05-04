@@ -14,11 +14,11 @@ data_set_name = 'cancer_dataset';
 % configuration
 numberOfLayers=1;
 hiddenLayerSize = 5;
-num_epochs = 80;
-lr = 0.03;
+num_epochs = 200;
+lr = 0.01;
 num_training = 100;
 
-trainFcn = 'traingd';
+trainFcn = 'trainscg';
 
 % Create a Pattern Recognition Network
 
@@ -38,7 +38,7 @@ net.divideParam.testRatio = 15/100;
 net.trainParam.lr = lr; 
 net.trainParam.epochs = num_epochs;
 net.trainParam.max_fail = num_epochs; % won't fail before all training finish
-net.trainParam.min_grad = 1e-5;
+net.trainParam.min_grad = 1e-20;
 net.trainParam.showWindow = 0;
 
 % Choose a Performance Function
