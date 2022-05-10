@@ -15,16 +15,17 @@ titleContent = sprintf("number of epochs per training: %d, " + ...
 title(titleContent)
 
 % build dendrogram
-figure
-method = "average";
-metric = 'cityblock';
-tree = linkage(weightsMatrix, method, metric);
-
-dendrogram(tree)
-titleContent = sprintf("WB dendrogram %s with %s, number of epochs per training: %d, " + ...
-    "did %d times training, learning rate:%f, hiddenLayerSize:%d, numberOfLayers:%d ", ...
-    method, metric, num_epochs, num_training, lr,hiddenLayerSize, numberOfLayers);
-title(titleContent)
+% see experimentingWB script for nice dendrogram
+% figure
+% method = "average";
+% metric = 'cityblock';
+% tree = linkage(weightsMatrix, method, metric);
+% 
+% dendrogram(tree)
+% titleContent = sprintf("WB dendrogram %s with %s, number of epochs per training: %d, " + ...
+%     "did %d times training, learning rate:%f, hiddenLayerSize:%d, numberOfLayers:%d ", ...
+%     method, metric, num_epochs, num_training, lr,hiddenLayerSize, numberOfLayers);
+% title(titleContent)
 
 % plot points for error (calculated by trainFcn)
 figure
