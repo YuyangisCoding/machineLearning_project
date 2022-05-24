@@ -17,9 +17,11 @@ dendrogram(tree)
 
 % 2d plot
 figure
-plot(sortedSum, LineWidth=2)
 num = size(sortedSum);
 num = num(1);
+
+scatter(1:num, sortedSum, LineWidth=2)
+
 % text(1:num, sortedSum, table2cell(array2table(result(:,6))))
 title("plot of summation of weights for each training")
 

@@ -29,7 +29,7 @@ net.divideParam.testRatio = 15/100;
 net.trainParam.epochs = num_epochs;
 net.trainParam.max_fail = num_epochs; % won't fail before all training finish
 net.trainParam.min_grad = 1e-5;
-net.trainParam.showWindow = 1;
+net.trainParam.showWindow = 0;
 
 % Choose a Performance Function
 % For a list of all performance functions type: help nnperformance
