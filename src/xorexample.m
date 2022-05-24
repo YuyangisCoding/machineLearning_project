@@ -2,7 +2,7 @@
 % Size of each data cloud
 squaresize = 5;
 % Space between each data cloud
-margin = 0.5;
+margin = 0.3;
 %Number of points in each data cloud
 numpts = 50;
 xordata = zeros(numpts*4,2);

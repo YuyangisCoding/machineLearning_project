@@ -16,8 +16,8 @@ best_epoch = tr.best_epoch;
 wb = getwb(new_net);
 
 % get training, test, validation error percentage
-trainErrorPercent = calcPercentError(trainTargets, y);
-valErrorPercent = calcPercentError(valTargets, y);
-testErrorPercent = calcPercentError(testTargets, y);
+trainErrorPercent = percentErrorOneoutputUnit(y, t);
+valErrorPercent = NaN;
+testErrorPercent = NaN;
 
 end

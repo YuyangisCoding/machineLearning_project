@@ -18,7 +18,7 @@ t = labels.';
 % configuration
 numberOfLayers=1;
 hiddenLayerSize = 2;
-num_epochs = 500;
+num_epochs = 5000;
 lr = 0.03;
 num_training = 100;
 
@@ -41,7 +41,6 @@ net.trainParam.min_grad = 0;
 net.trainParam.showWindow = 0;
 
 net.layers{1}.transferFcn = 'tansig';
-net.layers{2}.transferFcn = 'softmax';
 
 % Choose a Performance Function
 % For a list of all performance functions type: help nnperformance

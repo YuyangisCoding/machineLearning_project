@@ -1,30 +1,25 @@
 
-[x,t] = cancer_dataset;
+load xordata.mat
+
+data_set_name = 'xor';
+x = xordata.';
+t = labels.';
 lr = 0.03;
-epoch = 100;
+epoch = 5000;
 
 trainFcn = 'traingd';
 
 % Create a Pattern Recognition Network
-hiddenLayerSize = 20;
-numberOfLayers = 1;
-net = patternnet([hiddenLayerSize,numberOfLayers], trainFcn);
-
-% Choose Input and Output Pre/Post-Processing Functions
-% For a list of all processing functions type: help nnprocess
-net.input.processFcns = {'removeconstantrows','mapminmax'};
+net = patternnet(2, trainFcn);
 
 % Setup Division of Data for Training, Validation, Testing
 % For a list of all data division functions type: help nndivision
-net.divideFcn = 'dividerand';  % Divide data randomly
-net.divideMode = 'sample';  % Divide up every sample
-net.divideParam.trainRatio = 70/100;
-net.divideParam.valRatio = 15/100;
-net.divideParam.testRatio = 15/100;
+net.divideFcn = 'dividetrain'; 
+
 net.trainParam.lr = lr; 
 net.trainParam.epochs = epoch;
 net.trainParam.max_fail = epoch+1; % won't fail before training finish
-net.trainParam.min_grad = 1e-10;
+net.trainParam.min_grad = 0;
 net.trainParam.showWindow = 0;
 
 % Choose a Performance Function
