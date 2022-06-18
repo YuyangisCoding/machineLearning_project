@@ -33,7 +33,7 @@ labels = [zeros(numpts,1);
     zeros(numpts,1); 
     ones(numpts,1)];
 
-save("xordata.mat", "xordata", "labels")
+% save("xordata.mat", "xordata", "labels")
 
 
 

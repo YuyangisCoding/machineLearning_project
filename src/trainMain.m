@@ -1,7 +1,7 @@
 tic
-clear; clc;
-% dataset
-%  simpleclass_dataset     - Simple pattern recognition dataset.
+% clear; clc;
+% example built in dataset
+%    simpleclass_dataset     - Simple pattern recognition dataset.
 %    cancer_dataset          - Breast cancer dataset.
 %    crab_dataset            - Crab gender dataset.
 %    glass_dataset           - Glass chemical dataset.
@@ -10,55 +10,50 @@ clear; clc;
 %    thyroid_dataset         - Thyroid function dataset.
 %    wine_dataset            - Italian wines dataset.
 
-load xordata.mat
-data_set_name = 'xordata';
-x  = xordata.';
+
+data_set_name = 'xor';
+
+x = xordata.';
 t = labels.';
- 
-% the node topology is I-H-O, for xor data
-I = 2; 
-H = 2;
-O = 1;
-
-
-% t(2,:) = []; % make output unit become 1
-num_training = 3;
-
-%------------------------------------------initialise network
+%Try a smaller dataset
+%x = x(:,1:10);
+%t = t(1:10);
+%[x,t]=cancer_dataset;
 % configuration
 numberOfLayers=1;
 hiddenLayerSize = 2;
-num_epochs = 30000;
-lr = 0.005;
-trainFcn = 'traingd';    
+num_epochs = 300;
+lr = 0.3;
+num_training = 500;
+
+trainFcn = 'trainscg';
+
 % Create a Pattern Recognition Network
 net = patternnet(hiddenLayerSize, trainFcn);
-net = configure(net,x,t); % for manual weight initialisation
+
+% Setup Division of Data for Training, Validation, Testing
+% For a list of all data division functions type: help nndivision
 net.divideFcn = 'dividetrain'; % whole dataset is for training
+% net.divideMode = 'sample';
+% net.divideParam.trainRatio = 100/100;
+% net.divideParam.valRatio = 0;
+% net.divideParam.testRatio = 0;
 net.trainParam.lr = lr; 
 net.trainParam.epochs = num_epochs;
 net.trainParam.max_fail = num_epochs; % won't fail before all training finish
 net.trainParam.min_grad = 0;
 net.trainParam.showWindow = 0;
+
 net.layers{1}.transferFcn = 'tansig';
+
+% Choose a Performance Function
+% For a list of all performance functions type: help nnperformance
 net.performFcn = 'crossentropy';  % Cross Entropy
-%------------------------------------------initialise network ends
+
 
 % start...
 result = zeros(num_training,8);
 for i = 1:num_training
-    % random weights and bias initialisation, from -0.5 to 0.5
-    % use same setting as web demo
-    rng shuffle % obtain random number generator based current time
-    IW = rand(H,I)-0.5;
-    b1 = rand(H,1)-0.5;
-    LW = rand(O,H)-0.5;
-    b2 = rand(O,1)-0.5;
-    net.IW{1,1} = IW;
-    net.b{1,1} = b1;
-    net.LW{2,1} = LW;
-    net.b{2,1} = b2;
-    % train...
     [trainPerformance, testPerformance, ...
         valPerformance,best_epoch,wb, trainErrorPercent, ...
         valErrorPercent, testErrorPercent] = trainNetwork(net,x,t);
